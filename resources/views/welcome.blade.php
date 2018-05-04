@@ -29,7 +29,7 @@
                         </div>
                     {!! Form::close() !!}
                 </p>
-                <a class="banner_btn" href="{{url('/show_all')}}">قراءة المزيد</a> </div>
+                <a class="banner_btn" href="{{url('/user/create/bu')}}"> أضف عقارك مجاناً</a> </div>
         </div>
     </div>
     <div class="main">

@@ -18,17 +18,17 @@ function check_image($imgName,$path = '/public/upload/',$url = '/upload/'){
     }
 }
 function upload_img($request , $path = '/public/upload/',$width  ='500', $height = '250',$delOld = ''){
+    if($delOld != ''){
+        if(file_exists($delOld)){
+            File::delete($delOld);
+        }
+    }
     $dim = getimagesize($request);
     $fileName = $request->getClientOriginalName();
     $request->move(base_path().$path,$fileName);
     if($width == '500' && $height == '250'){
         $thumb_path= base_path().'/public/upload/thumb/'.$fileName;
         Image::make(base_path().$path.$fileName)->resize('500','250')->save($thumb_path,100);
-    }
-    if($delOld != ''){
-        if(file_exists($delOld)){
-            File::delete($delOld);
-        }
     }
     return $fileName;
 }
@@ -75,6 +75,12 @@ function contact(){
         '3' => 'إستفسار',
         '4' => 'إعجاب'
     ];
+}
+function unread_msg(){
+    return \App\ContactUs::where('view',0)->get();
+}
+function count_unread_msg(){
+    return \App\ContactUs::where('view',0)->count();
 }
 function bu_place(){
     return [

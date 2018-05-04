@@ -61,6 +61,33 @@
             </a>
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
+                    <li class="dropdown messages-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-envelope-o"></i>
+                            <span class="label label-success">{{count_unread_msg()}}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">لديك عدد  {{count_unread_msg()}} رسائل غير مقروءة</li>
+                            <li>
+                                <!-- inner menu: contains the actual data -->
+                                <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 200px;"><ul class="menu" style="overflow: hidden; width: 100%; height: 200px;">
+                                        @foreach(unread_msg() as $key => $value)
+                                            <li>
+                                                <a href="{{url('/adminPanel/contact/'.$value->id.'/edit')}}">
+                                                    <h4>
+                                                        {{$value->contact_name}}
+                                                        <small><i class="fa fa-clock-o"></i> {{$value->created_at}}</small>
+                                                    </h4>
+                                                    <p>{{str_limit($value->contact_msg,10)}}</p>
+                                                </a>
+                                            </li>
+
+                                        @endforeach
+                                       </ul><div class="slimScrollBar" style="background: rgb(0, 0, 0); width: 3px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px;"></div><div class="slimScrollRail" style="width: 3px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+                            </li>
+                            <li class="footer"><a href="{{url('/adminPanel/contact/')}}">مشاهدة جميع الرسائل</a></li>
+                        </ul>
+                    </li>
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">

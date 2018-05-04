@@ -56,7 +56,8 @@ class BuController extends Controller
     }
     public function edit($id){
         $bu = Bu::findOrFail($id);
-        return view('admin.bu.edit',compact('bu'));
+        $edit = 'edit';
+        return view('admin.bu.edit',compact('bu','edit'));
     }
     public function update($id, BuRequest $request){
         $bu = Bu::findOrFail($id);
@@ -163,5 +164,45 @@ class BuController extends Controller
     }
     public function getAjaxInfo(Request $request , Bu $bu){
         return $bu->findOrFail($request->id)->toJson();
+    }
+    public function userAddView(){
+        return view('website.userAdd');
+    }
+    public function userStore(BuRequest $request , Bu $bu){
+        $user = Auth::user() ? Auth::user()->id : 0;
+        if($file = $request->file('image')){
+            $name = upload_img($file,'/public/upload/bu/');
+            if(!$name){
+                return Redirect::back()->withFlashMessage('أبعاد الصورة أكبر من الأبعاد المسموح بها الرجاء اختيار صورة عرض أقل من 500 بكسل وطول أقل من 300 بكسل');
+            }
+            $image = $name;
+        }else{
+            $image = '';
+        }
+        $data = [
+            'bu_name'   => $request->bu_name,
+            'bu_price'  => $request->bu_price,
+            'bu_rent'   => $request->bu_rent,
+            'bu_square' => $request->bu_square,
+            'bu_type'   => $request->bu_type,
+            'bu_small_disc' => strip_tags(str_limit($request->bu_large_disc,160)),
+            'bu_meta' => $request->bu_meta,
+            'bu_langtuide' => $request->bu_langtuide,
+            'bu_latituide' => $request->bu_latituide,
+            'bu_large_disc' => $request->bu_large_disc,
+            'rooms_num' => $request->rooms_num,
+            'bath_num' => $request->bath_num,
+            'user_id' => $user,
+            'image'=> $image,
+            'bu_status' => 1
+        ];
+        $bu->create($data);
+        return view('website.done');
+
+    }
+    public function showBu(Bu $bu){
+        $user = Auth::user();
+        $bu_all = $bu->where('user_id',$user->id)->paginate(10);
+        return view('website.showBu',compact('bu_all','user'));
     }
 }

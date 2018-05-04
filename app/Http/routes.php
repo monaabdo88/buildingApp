@@ -45,7 +45,10 @@ Route::group(['middleware'=>'web'],function(){
     Route::get('/build/{id}','BuController@show_bu');
     Route::get('/ajax/getBuild','BuController@getAjaxInfo');
     Route::get('/contact','HomeController@contact');
+    Route::get('/user/create/bu','BuController@userAddView');
+    Route::post('/user/create/bu','BuController@userStore');
     Route::post('/contact','ContactController@store');
     Route::get('/home', 'HomeController@index');
+    Route::get('/user/showBu','BuController@showBu')->middleware('auth');
 
 });
