@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\AddUserRequest;
 use App\User;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Datatables;
 
@@ -74,5 +76,22 @@ class UsersController extends Controller
                 return $all;
             })
             ->make(true);
+    }
+    public function editInfo(){
+        $user = Auth::user();
+        return view('website.userEdit',compact('user'));
+    }
+    public function saveInfo(AddUserRequest $request){
+        $user_id = Auth::user();
+        $user = User::findOrFail($user_id);
+        if($request->password == ''){
+            $input = $request->except('password');
+        }else{
+            $input = $request->all();
+            $input['password'] = bcrypt($request->password);
+        }
+        $user->update($input);
+        return Redirect::back()->with('flash_message','تم تعديل العضوية بنجاح');
+
     }
 }

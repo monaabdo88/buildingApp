@@ -8,7 +8,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="contact_bottom">
                 <hr/>
-                <h3 class="text-center">تسجيل الدخول</h3>
+                    <h3 class="text-center">تسجيل الدخول</h3>
                 <hr />
                     <br/>
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">

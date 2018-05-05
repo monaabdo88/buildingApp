@@ -11,7 +11,11 @@
                             <div class="producttitle">{{$bu->bu_name}}</div>
                             <p class="text-justify">{{str_limit($bu->bu_small_disc,110)}}</p>
                             <div class="productprice"><div class="pull-left">
+                                    @if($bu->bu_status == 0)
                                     <a href="{{url('/build/'.$bu->id)}}" class="btn btn-primary btm-sm text-center" role="button">قراءة المزيد
+                                    @else
+                                        <span class="btn btn-danger btm-sm text-center">بإنتظار التفعيل</span>
+                                        @endif
                                     </a></div>
                                 <div class="pricetext">{{$bu->bu_price}}</div></div>
                         </div>

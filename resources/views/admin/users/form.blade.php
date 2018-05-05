@@ -1,7 +1,7 @@
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-2 control-label">أسم المستخدم</label>
+                            <label for="name" class="col-md-2 control-label pull-right">أسم المستخدم</label>
                             <div class="col-md-6 col-md-offset-2">
                                 {!! Form::text('name',null,['class'=>'form-control']) !!}
                                 @if ($errors->has('name'))
@@ -15,7 +15,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-2 control-label">البريد الإلكتروني </label>
+                            <label for="email" class="col-md-2 control-label pull-right">البريد الإلكتروني </label>
                             <div class="col-md-6 col-md-offset-2">
                                 {!! Form::text('email',null,['class'=>'form-control']) !!}
                                 @if ($errors->has('email'))
@@ -27,7 +27,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-2 control-label">كلمة المرور </label>
+                            <label for="password" class="col-md-2 control-label pull-right">كلمة المرور </label>
                             <div class="col-md-6 col-md-offset-2">
                                 <input id="password" type="password" placeholder="كلمة المرور" class="form-control" name="password">
 
@@ -40,7 +40,7 @@
                          </div>
 
                         <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label for="password-confirm" class="col-md-2 control-label">تأكيد كلمة المرور </label>
+                            <label for="password-confirm" class="col-md-2 control-label pull-right">تأكيد كلمة المرور </label>
                             <div class="col-md-6 col-md-offset-2">
                                 <input id="password-confirm" type="password" placeholder="تأكيد كلمة المرور ....." class="form-control" name="password_confirmation">
 
@@ -51,9 +51,9 @@
                                 @endif
                             </div>
                         </div>
-
+                        @if($user_type != 1)
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-2 control-label"> نوع العضوية </label>
+                            <label for="email" class="col-md-2 control-label pull-right"> نوع العضوية </label>
                             <div class="col-md-6 col-md-offset-2">
                                 {!! Form::select('is_admin',['0' => 'عضو', '1' => 'مدير'],null,['class'=>'form-control']) !!}
                                 @if ($errors->has('is_admin'))
@@ -63,7 +63,7 @@
                                 @endif
                             </div>
                         </div>
-
+                        @endif
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4 text-center">
                                 <button type="submit" class="btn btn-primary">

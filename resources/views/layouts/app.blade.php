@@ -70,7 +70,7 @@
         </div>
     </div>
 </div>
-
+    @include('layouts.message');
     @yield('content')
 
 <div class="footer">

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-{{$butInfo->bu_name}}
+{{$buInfo->bu_name}}
 @endsection
 @section('header')
     {!! Html::style('cus/bu.css') !!}

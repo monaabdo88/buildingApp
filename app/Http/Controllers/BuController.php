@@ -158,6 +158,9 @@ class BuController extends Controller
     }
     public function show_bu($id, Bu $bu){
         $buInfo = $bu->findOrFail($id);
+        if($buInfo->bu_status == 1){
+            return view('website.noper',compact('buInfo'));
+        }
         $same_rent = $bu->where('bu_rent',$buInfo->bu_rent)->orderBy(DB::raw('RAND()'))->take(3)->get();
         $same_type = $bu->where('bu_type',$buInfo->bu_type)->orderBy(DB::raw('RAND()'))->take(3)->get();
         return view('website.show',compact('buInfo','same_rent','same_type'));
@@ -200,9 +203,9 @@ class BuController extends Controller
         return view('website.done');
 
     }
-    public function showBu(Bu $bu){
+    public function showBu($bu_status , Bu $bu){
         $user = Auth::user();
-        $bu_all = $bu->where('user_id',$user->id)->paginate(10);
+        $bu_all = $bu->where('user_id',$user->id)->where('bu_status',$bu_status)->paginate(10);
         return view('website.showBu',compact('bu_all','user'));
     }
 }

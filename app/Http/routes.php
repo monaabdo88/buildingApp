@@ -49,6 +49,7 @@ Route::group(['middleware'=>'web'],function(){
     Route::post('/user/create/bu','BuController@userStore');
     Route::post('/contact','ContactController@store');
     Route::get('/home', 'HomeController@index');
-    Route::get('/user/showBu','BuController@showBu')->middleware('auth');
-
+    Route::get('/user/showBu/{bu_status}','BuController@showBu')->middleware('auth');
+    Route::get('/user/editInfo','UsersController@editInfo')->middleware('auth');
+    Route::patch('/user/editInfo',['as'=>'user.editInfo','uses'=>'UsersController@saveInfo'])->middleware('auth');
 });
