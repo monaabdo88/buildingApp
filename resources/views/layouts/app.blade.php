@@ -61,7 +61,29 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>تسجيل الخروج</a></li>
+                            <li>
+                                <a href="{{url('/user/editInfo')}}">
+                                    <i class="glyphicon glyphicon-home"></i>
+                                    تعديل البيانات  </a>
+                            </li>
+                            <li>
+                                <a href="{{url('/user/showBu/0')}}">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                    عقارات مفعلة</a>
+                            </li>
+                            <li>
+                                <a href="{{url('/user/showBu/1')}}">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                    عقارات بإنتظار التفعيل</a>
+                            </li>
+
+                            <li>
+                                <a href="{{url('/user/create/bu')}}" target="_blank">
+                                    <i class="glyphicon glyphicon-ok"></i>
+                                    إضافة عقار </a>
+                            </li>
+
+                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i> تسجيل الخروج </a></li>
                         </ul>
                     </li>
                 @endif

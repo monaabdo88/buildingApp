@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditUserRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests\AddUserRequest;
 use App\User;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Datatables;
@@ -33,8 +35,20 @@ class UsersController extends Controller
         $user = $user->findOrFail($id);
         return view('admin.users.edit',compact('user'));
     }
-    public function update($id,User $user, Request $request){
+    public function update($id,User $user, EditUserRequest $request){
         $user = $user->findOrFail($id);
+        if($request->email != $user->email){
+            $checkemail = $user->where('email',$request->email)->count();
+            if($checkemail > 0){
+                return Redirect::back()->with('flash_message','البريد الإلكتروني الذي أدخلته مستخدم بالفعل');
+            }
+        }
+        if($request->name != $user->name){
+            $checkname = $user->where('name',$request->name)->count();
+            if($checkname > 0){
+                return Redirect::back()->with('flash_message','أسم المستخدم الذي أدخلته مستخدم بالفعل');
+            }
+        }
         if($request->password == ''){
             $input = $request->except('password');
         }else{
@@ -81,9 +95,20 @@ class UsersController extends Controller
         $user = Auth::user();
         return view('website.userEdit',compact('user'));
     }
-    public function saveInfo(AddUserRequest $request){
-        $user_id = Auth::user();
-        $user = User::findOrFail($user_id);
+    public function saveInfo(EditUserRequest $request){
+        $user = Auth::user();
+        if($request->email != $user->email){
+            $checkemail = $user->where('email',$request->email)->count();
+            if($checkemail > 0){
+                return Redirect::back()->with('flash_message','البريد الإلكتروني الذي أدخلته مستخدم بالفعل');
+            }
+        }
+        if($request->name != $user->name){
+            $checkname = $user->where('name',$request->name)->count();
+            if($checkname > 0){
+                return Redirect::back()->with('flash_message','أسم المستخدم الذي أدخلته مستخدم بالفعل');
+            }
+        }
         if($request->password == ''){
             $input = $request->except('password');
         }else{
@@ -93,5 +118,15 @@ class UsersController extends Controller
         $user->update($input);
         return Redirect::back()->with('flash_message','تم تعديل العضوية بنجاح');
 
+    }
+    public function changePass(EditUserRequest $request){
+        $user = Auth::user();
+        if(Hash::check($request->email,$user->email)){
+            $new_pass = Hash::make($request->new_pass);
+            $user->fill(['password'=>$new_pass])->save();
+            return Redirect::back()->withFlashMessage(' تم تعديل كلمة المرور بنجاح');
+        }else{
+            return Redirect::back()->withFlashMessage('الباسورد القديم غير مطابق للباسورد المسجل لدينا');
+        }
     }
 }

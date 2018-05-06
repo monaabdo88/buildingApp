@@ -32,7 +32,7 @@ Route::group(['middlewareGroups'=>['web','admin']],function(){
     Route::get('/adminPanel/contact/{id}/del','ContactController@destroy');
 });
 /*route user*/
-Route::group(['middleware'=>'web'],function(){
+//Route::group(['middleware' => 'web'],function(){
     Route::auth();
     Route::get('/', function () {
         return view('welcome');
@@ -52,4 +52,4 @@ Route::group(['middleware'=>'web'],function(){
     Route::get('/user/showBu/{bu_status}','BuController@showBu')->middleware('auth');
     Route::get('/user/editInfo','UsersController@editInfo')->middleware('auth');
     Route::patch('/user/editInfo',['as'=>'user.editInfo','uses'=>'UsersController@saveInfo'])->middleware('auth');
-});
+//});

@@ -1,39 +1,3 @@
-@if(Auth::user())
-    <div class="profile-sidebar">
-        <!-- SIDEBAR MENU -->
-        <div class="profile-usermenu">
-
-            <ul class="nav nav-links">
-            <li class="active"><a href="#" class="text-center">خيارات العضو</a></li>
-                <li>
-                    <a href="{{url('/user/editInfo')}}">
-                        <i class="glyphicon glyphicon-home"></i>
-                        تعديل البيانات  </a>
-                </li>
-                <li>
-                    <a href="{{url('/user/showBu/0')}}">
-                        <i class="glyphicon glyphicon-user"></i>
-                        عقارات مفعلة</a>
-                </li>
-                <li>
-                    <a href="{{url('/user/showBu/1')}}">
-                        <i class="glyphicon glyphicon-user"></i>
-                        عقارات بإنتظار التفعيل</a>
-                </li>
-
-                <li>
-                    <a href="{{url('/user/create/bu')}}" target="_blank">
-                        <i class="glyphicon glyphicon-ok"></i>
-                        إضافة عقار </a>
-                </li>
-            </ul>
-
-        </div>
-        <!-- END MENU -->
-    </div>
-
-@endif
-
 <div class="profile-sidebar">
     <!-- SIDEBAR MENU -->
     <div class="profile-usermenu">
