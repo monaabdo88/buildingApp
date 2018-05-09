@@ -158,8 +158,10 @@ class BuController extends Controller
     }
     public function show_bu($id, Bu $bu){
         $buInfo = $bu->findOrFail($id);
+        $msgTitle = "عقار بإنتظار التفعيل";
+        $msgBody = "   هذا العقار".$buInfo->bu_name." مسجل لدينا وبإنتظار التفعيل في مدة أقصاها 24 ساعة ";
         if($buInfo->bu_status == 1){
-            return view('website.noper',compact('buInfo'));
+            return view('website.noper',compact('buInfo','msgTitle','msgBody'));
         }
         $same_rent = $bu->where('bu_rent',$buInfo->bu_rent)->orderBy(DB::raw('RAND()'))->take(3)->get();
         $same_type = $bu->where('bu_type',$buInfo->bu_type)->orderBy(DB::raw('RAND()'))->take(3)->get();
@@ -207,5 +209,15 @@ class BuController extends Controller
         $user = Auth::user();
         $bu_all = $bu->where('user_id',$user->id)->where('bu_status',$bu_status)->paginate(10);
         return view('website.showBu',compact('bu_all','user'));
+    }
+    public function editBu($id){
+        $user = Auth::user();
+        $bu = Bu::findOrFail($id);
+        if($user->id != $bu->user_id){
+            $msgTitle = "عقار مخصص لعضو أخر";
+            $msgBody = "   هذا العقار".$bu->bu_name." لم تقم بإضافته وليس لديك صلاحية التعديل عليها ";
+            return view('website.noper',compact('buInfo','msgTitle','msgBody'));
+        }
+        return view('website.editBu',compact('bu','user'));
     }
 }

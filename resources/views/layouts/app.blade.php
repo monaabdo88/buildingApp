@@ -32,9 +32,9 @@
     <div class="container"> <a class="navbar-brand pull-right" href="{{url('/')}}"><i class="fa fa-paper-plane"></i> القاهرة للعقارات</a>
         <div class="menu pull-left"> <a class="toggleMenu" href="#"><img src="site/images/nav_icon.png" alt="" /> </a>
             <ul class="nav" id="nav">
-                <li class="current"><a href="{{url('/')}}">الرئيسية</a></li>
-                <li class="dropdown"><a href="{{url('/show_all')}}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">جميع العقارات</a></li>
-                <li class="dropdown">
+                <li class="{{setActive(['home','current'])}}"><a href="{{url('/')}}">الرئيسية</a></li>
+                <li class="{{setActive(['show_all','current'])}}"><a href="{{url('/show_all')}}">جميع العقارات</a></li>
+                <li class="dropdown {{setActive(['search','current'])}}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">إيجار <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         @foreach(bu_type() as $key=>$type)
@@ -42,7 +42,7 @@
                         @endforeach
                     </ul>
                 </li>
-                <li class="dropdown">
+                <li class="dropdown {{setActive(['search','current'])}}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">تمليك <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         @foreach(bu_type() as $key=>$type)
@@ -50,7 +50,7 @@
                         @endforeach
                     </ul>
                 </li>
-                <li><a href="{{url('/contact')}}"> أتصل بنا</a></li>
+                <li class="{{setActive(['contact','current'])}}"><a href="{{url('/contact')}}"> أتصل بنا</a></li>
                 @if (Auth::guest())
                     <li><a href="{{ url('/login') }}">تسجيل الدخول</a></li>
                     <li><a href="{{ url('/register') }}">عضوية جديدة</a></li>
@@ -63,23 +63,23 @@
                         <ul class="dropdown-menu" role="menu">
                             <li>
                                 <a href="{{url('/user/editInfo')}}">
-                                    <i class="glyphicon glyphicon-home"></i>
+                                    <i class="fa fa-edit"></i>
                                     تعديل البيانات  </a>
                             </li>
                             <li>
                                 <a href="{{url('/user/showBu/0')}}">
-                                    <i class="glyphicon glyphicon-user"></i>
+                                    <i class="fa fa-check"></i>
                                     عقارات مفعلة</a>
                             </li>
                             <li>
                                 <a href="{{url('/user/showBu/1')}}">
-                                    <i class="glyphicon glyphicon-user"></i>
+                                    <i class="fa fa-clock-o"></i>
                                     عقارات بإنتظار التفعيل</a>
                             </li>
 
                             <li>
                                 <a href="{{url('/user/create/bu')}}" target="_blank">
-                                    <i class="glyphicon glyphicon-ok"></i>
+                                    <i class="fa fa-plus"></i>
                                     إضافة عقار </a>
                             </li>
 

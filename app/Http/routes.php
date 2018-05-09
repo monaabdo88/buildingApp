@@ -52,4 +52,5 @@ Route::group(['middlewareGroups'=>['web','admin']],function(){
     Route::get('/user/showBu/{bu_status}','BuController@showBu')->middleware('auth');
     Route::get('/user/editInfo','UsersController@editInfo')->middleware('auth');
     Route::patch('/user/editInfo',['as'=>'user.editInfo','uses'=>'UsersController@saveInfo'])->middleware('auth');
+    Route::get('/user/editbu/{id}','BuController@editBu')->middleware('auth');
 //});

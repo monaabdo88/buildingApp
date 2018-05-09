@@ -1,6 +1,7 @@
 <?php
 use App\SiteSetting;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Request;
 use Intervention\Image\Facades\Image;
 
 function get_setting($namesetting = 'namesetting'){
@@ -330,3 +331,22 @@ function bu_place(){
 
     ];
 }
+function setActive($array,$class = "active"){
+    if(!empty($array)){
+        $seg_array = [];
+        foreach($array as $item => $val) {
+            if(Request::segment($item+1) == $val){
+                $seg_array[] = $item;
+            }
+        }
+        if(count($seg_array) == count(Request::segments())){
+            if(isset($seg_array[0])){
+                return $class;
+            }
+        }
+    }
+}
+
+/*function setActive($path, $class = "active"){
+    return Request::is($path . '*') ? $class :  '';
+}*/

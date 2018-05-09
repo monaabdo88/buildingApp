@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-     عقار
+    {{$msgTitle}}
 @endsection
 @section('header')
     {!! Html::style('cus/bu.css') !!}
@@ -16,14 +16,12 @@
             <div class="col-md-9">
                 <ol class="breadcrumb">
                     <li><a href="{{url('/')}}">الرئيسية</a></li>
-                    <li></li>
+                    <li>{{$msgTitle}}</li>
                 </ol>
                 <div class="profile-content">
                     <div class="alert alert-danger">
                         <p class="text-center">
-                            هذا العقار
-                            {{$buInfo->bu_name}}
-                            مسجل لدينا وبإنتظار التفعيل في مدة أقصاها 24 ساعة
+                            {{$msgBody}}
                         </p>
                     </div>
                 </div>

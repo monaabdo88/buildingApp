@@ -2,40 +2,40 @@
     <!-- SIDEBAR MENU -->
     <div class="profile-usermenu">
         <ul class="nav nav-links">
-            <li class="active">
+            <li class="{{setActive(['show_all'])}}">
                 <a href="{{url('/show_all')}}">
-                    <i class="glyphicon glyphicon-home"></i>
-                    كل العقارات </a>
+                    <i class="fa fa-building"></i>
+                    كل العقارات   </a>
             </li>
-            <li>
+            <li class="{{setActive(['forrent'])}}">
                 <a href="{{url('/forrent')}}">
-                    <i class="glyphicon glyphicon-user"></i>
-                    إيجار</a>
+                    <i class="fa fa-calendar"></i>
+                    إيجار </a>
             </li>
-            <li>
-                <a href="{{url('/forbuy')}}" target="_blank">
-                    <i class="glyphicon glyphicon-ok"></i>
-                    تمليك </a>
+            <li class="{{setActive(['forbuy'])}}">
+                <a href="{{url('/forbuy')}}">
+                    <i class="fa fa-building-o"></i>
+                    تمليك  </a>
             </li>
-            <li>
+            <li class="{{setActive(['type','0'])}}">
                 <a href="{{url('/type/0')}}">
-                    <i class="glyphicon glyphicon-flag"></i>
-                    شقة </a>
+                    <i class="fa fa-hdd-o"></i>
+                    شقة   </a>
             </li>
-            <li>
+            <li class="{{setActive(['type','1'])}}">
                 <a href="{{url('/type/1')}}">
-                    <i class="glyphicon glyphicon-flag"></i>
-                    فيلا </a>
+                    <i class="fa fa-home"></i>
+                    فيلا  </a>
             </li>
-            <li>
+            <li class="{{setActive(['type','2'])}}">
                 <a href="{{url('/type/2')}}">
-                    <i class="glyphicon glyphicon-flag"></i>
-                    منزل </a>
+                    <i class="fa fa-hospital-o"></i>
+                    منزل  </a>
             </li>
-            <li>
+            <li class="{{setActive(['type','3'])}}">
                 <a href="{{url('/type/3')}}">
-                    <i class="glyphicon glyphicon-flag"></i>
-                    شاليه </a>
+                    <i class="fa fa-institution"></i>
+                    شاليه  </a>
             </li>
         </ul>
 

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('title')
-إضافة عقار
+        تعديل عقار
+{{$bu->bu_name}}
 @endsection
 @section('header')
     {!! Html::style('cus/bu.css') !!}
@@ -16,11 +17,11 @@
             <div class="col-md-9">
                 <ol class="breadcrumb">
                     <li><a href="{{url('/')}}">الرئيسية</a></li>
-                    <li>إضافة عقار جديد</li>
+                    <li>تعديل العقار {{$bu->bu_name}}</li>
                 </ol>
                 <div class="profile-content">
-                    {!! Form::open($buInfo,['url'=>'/user/create/bu','class'=>'form-horizontal','method'=>'PATCH','files'=>true]) !!}
-                        @include('admin.bu.form',['user'=> 1])
+                    {!! Form::model($bu,['route'=>['adminPanel.bu.update',$bu->id],'method'=>'PATCH','class'=>'form-horizontal','files'=>true]) !!}
+                    @include('admin.bu.form');
                     {!! Form::close() !!}
                     <div class="clearfix"></div>
                 </div>
