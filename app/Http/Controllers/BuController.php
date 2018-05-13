@@ -215,9 +215,28 @@ class BuController extends Controller
         $bu = Bu::findOrFail($id);
         if($user->id != $bu->user_id){
             $msgTitle = "عقار مخصص لعضو أخر";
-            $msgBody = "   هذا العقار".$bu->bu_name." لم تقم بإضافته وليس لديك صلاحية التعديل عليها ";
+            $msgBody = "   هذا العقار ".$bu->bu_name." لم تقم بإضافته وليس لديك صلاحية التعديل عليها ";
             return view('website.noper',compact('buInfo','msgTitle','msgBody'));
+        }elseif($bu->bu_status == 0){
+            $msgTitle = "عقار مفعل لا يمكن التعديل عليه";
+            $msgBody = "   هذا العقار ".$bu->bu_name."لا يمكن التعديل عليه ";
+            return view('website.noper',compact('buInfo','msgTitle','msgBody'));
+
         }
-        return view('website.editBu',compact('bu','user'));
+        $edit = 'edit';
+        return view('website.editBu',compact('bu','user','edit'));
+    }
+    public function saveChanges(BuRequest $request){
+        $bu = Bu::findOrFail($request->bu_id);
+        $input = $request->all();
+        if($file = $request->file('image')){
+            $name = upload_img($file,'/public/upload/','500','250',base_path().'/public/upload/'.$bu->image);
+            if(!$name){
+                return Redirect::back()->withFlashMessage('أبعاد الصورة أكبر من الأبعاد المسموح بها الرجاء اختيار صورة عرض أقل من 500 بكسل وطول أقل من 300 بكسل');
+            }
+            $input['image'] = $name;
+        }
+        $bu->update($input);
+        return Redirect::back()->with('flash_message','تم تعديل العقار بنجاح');
     }
 }

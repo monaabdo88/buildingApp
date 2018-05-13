@@ -20,8 +20,9 @@
                     <li>تعديل العقار {{$bu->bu_name}}</li>
                 </ol>
                 <div class="profile-content">
-                    {!! Form::model($bu,['route'=>['adminPanel.bu.update',$bu->id],'method'=>'PATCH','class'=>'form-horizontal','files'=>true]) !!}
-                    @include('admin.bu.form');
+                    {!! Form::model($bu,['url'=>'/user/saveChanges/','method'=>'PATCH','class'=>'form-horizontal','files'=>true]) !!}
+                    <input type="hidden" name="bu_id" value="{{$bu->id}}" />
+                    @include('admin.bu.form',['user'=> 1])
                     {!! Form::close() !!}
                     <div class="clearfix"></div>
                 </div>

@@ -69,12 +69,12 @@
                             <li>
                                 <a href="{{url('/user/showBu/0')}}">
                                     <i class="fa fa-check"></i>
-                                    عقارات مفعلة</a>
+                                    عقارات مفعلة <label class="label label-default">{{get_count(0,Auth::user()->id)}}</label> </a>
                             </li>
                             <li>
                                 <a href="{{url('/user/showBu/1')}}">
                                     <i class="fa fa-clock-o"></i>
-                                    عقارات بإنتظار التفعيل</a>
+                                    عقارات بإنتظار التفعيل <label class="label label-default">{{get_count(1,Auth::user()->id)}}</label></a>
                             </li>
 
                             <li>
@@ -92,7 +92,7 @@
         </div>
     </div>
 </div>
-    @include('layouts.message');
+    @include('layouts.message')
     @yield('content')
 
 <div class="footer">

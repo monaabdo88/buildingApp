@@ -173,7 +173,7 @@
 </div>
 @if(isset($edit))
 @if($bu->image)
-    <img src="{{Request::root().'/upload/bu/'.$bu->image}}" class="img-responsive img-thumbnail col-md-3 pull-left" />
+    <img src="{{Request::root().'/upload/'.$bu->image}}" class="img-responsive img-thumbnail col-md-3 pull-left" />
     @endif
 @endif
 <div class="form-group">
