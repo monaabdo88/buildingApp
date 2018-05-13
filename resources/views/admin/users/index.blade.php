@@ -36,6 +36,7 @@
                                 <th>البريد الإلكتروني</th>
                                 <th>تاريخ العضوية </th>
                                 <th>نوع العضوية</th>
+                                <th>عقارات العضو</th>
                                 <th>التحكم</th>
                             </tr>
                             </thead>
@@ -49,6 +50,7 @@
                                 <th>البريد الإلكتروني</th>
                                 <th>تاريخ العضوية </th>
                                 <th>نوع العضوية</th>
+                                <th>عقارات العضو</th>
                                 <th>التحكم</th>
                             </tr>
                             </tfoot>
@@ -104,6 +106,7 @@
                 {data: 'email', name: 'email'},
                 {data: 'created_at', name: 'created_at'},
                 {data: 'is_admin', name: 'is_admin'},
+                {data: 'myBu',name:'myBu'},
                 {data: 'control', name: ''}
             ],
             "language": {

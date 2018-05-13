@@ -25,8 +25,9 @@ Route::group(['middlewareGroups'=>['web','admin']],function(){
     Route::get('/adminPanel/siteSettings','SiteSettingController@index');
     Route::post('/adminPanel/siteSettings','SiteSettingController@store');
     #Building
-    Route::resource('/adminPanel/bu','BuController');
+    Route::resource('/adminPanel/bu','BuController',['except'=>['index','show']]);
     Route::get('/adminPanel/bu/{id}/del','BuController@destroy');
+    Route::get('/adminPanel/bu/{id?}','BuController@index');
     #contact
     Route::resource('/adminPanel/contact','ContactController');
     Route::get('/adminPanel/contact/{id}/del','ContactController@destroy');

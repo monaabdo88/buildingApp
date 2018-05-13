@@ -109,7 +109,7 @@
         var table = $('#data').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{{ url('/adminPanel/bu/data') }}',
+            ajax: '{{ url('/adminPanel/bu/data') }}{{$user_id}}',
             columns: [
                 {data: 'id', name: 'id'},
                 {data: 'bu_name', name: 'bu_name'},

@@ -69,28 +69,6 @@ class UsersController extends Controller
         }
         return redirect('/adminPanel/users')->with('flash_message','لا يمكن حذف هذه العضوية');
     }
-    public function anyData(User $user){
-        $users  = $user->all();
-        return Datatables::of($users)
-            ->editColumn('name',function ($model){
-            return '<a href="/adminPanel/users/'.$model->id.'/edit">'.$model->name.'</a>';
-            })
-            ->editColumn('email',function ($model){
-                $email = $model->email;
-                return $email;
-            })
-            ->editColumn('is_admin',function ($model){
-                return $model->is_admin == 0 ? '<span class="badge badge-info">عضو</span>': '<span class="badge badge-info">مدير</span>';
-            })
-            ->editColumn('control',function ($model){
-                $all = '<a href="/adminPanel/users/'.$model->id.'/edit" class="btn btn-info"><i class="fa fa-edit"></i></a> ';
-                if($model->id != 1) {
-                    $all .= ' <a href="/adminPanel/users/' . $model->id . '/del" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>';
-                }
-                return $all;
-            })
-            ->make(true);
-    }
     public function editInfo(){
         $user = Auth::user();
         return view('website.userEdit',compact('user'));
@@ -129,4 +107,30 @@ class UsersController extends Controller
             return Redirect::back()->withFlashMessage('الباسورد القديم غير مطابق للباسورد المسجل لدينا');
         }
     }
+    public function anyData(User $user){
+        $users  = $user->all();
+        return Datatables::of($users)
+            ->editColumn('name',function ($model){
+                return '<a href="/adminPanel/users/'.$model->id.'/edit">'.$model->name.'</a>';
+            })
+            ->editColumn('email',function ($model){
+                $email = $model->email;
+                return $email;
+            })
+            ->editColumn('is_admin',function ($model){
+                return $model->is_admin == 0 ? '<span class="badge badge-info">عضو</span>': '<span class="badge badge-info">مدير</span>';
+            })
+            ->editColumn('myBu',function($model){
+                return '<a href="/adminPanel/bu/'.$model->id.'">عقارات العضو</a>';
+            })
+            ->editColumn('control',function ($model){
+                $all = '<a href="/adminPanel/users/'.$model->id.'/edit" class="btn btn-info"><i class="fa fa-edit"></i></a> ';
+                if($model->id != 1) {
+                    $all .= ' <a href="/adminPanel/users/' . $model->id . '/del" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>';
+                }
+                return $all;
+            })
+            ->make(true);
+    }
+
 }

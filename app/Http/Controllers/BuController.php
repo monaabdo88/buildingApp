@@ -15,8 +15,9 @@ use Illuminate\Support\Facades\Session;
 class BuController extends Controller
 {
     //
-    public function index(){
-        return view('admin.bu.index');
+    public function index(Request $request){
+        $user_id = $request->id !== null ? '?user_id='.$request->id : null;
+        return view('admin.bu.index',compact('user_id'));
     }
     public function create(){
         return view('admin.bu.add');
@@ -81,8 +82,12 @@ class BuController extends Controller
             return redirect('/adminPanel/bu/')->withFlashMessage('تم حذف العقار بنجاح');
        //   return redirect('/adminPanel/bu')->withFlashMessage('لا يمكن حذف هذه العقار');
     }
-    public function anyData(Bu $bu){
-        $bus  = $bu->all();
+    public function anyData(Request $request,Bu $bu){
+        if($request->user_id){
+            $bus  = $bu->where('user_id',$request->user_id)->get();
+        }else{
+            $bus  = $bu->all();
+        }
         return Datatables::of($bus)
             ->editColumn('bu_name',function ($model){
                 return '<a href="/adminPanel/bu/'.$model->id.'/edit">'.$model->bu_name.'</a>';
