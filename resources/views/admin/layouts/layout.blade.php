@@ -88,6 +88,31 @@
                             <li class="footer"><a href="{{url('/adminPanel/contact/')}}">مشاهدة جميع الرسائل</a></li>
                         </ul>
                     </li>
+                    <li class="dropdown notifications-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-bell-o"></i>
+                            <span class="label label-warning">{{get_count_active('1')}}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">لديك عدد {{get_count_active('1')}} عقار غير مفعل</li>
+                            <li>
+                                <!-- inner menu: contains the actual data -->
+                             <ul class="menu" style="overflow: hidden; width: 100%; height: 200px;">
+                                        @foreach(\App\Bu::where('bu_status',1)->get() as $bu_info)
+                                            <li>
+                                                <a class="pull-right col-md-8" href="{{url('/adminPanel/bu/'.$bu_info->id.'/edit')}}">
+                                                    <i class="fa fa-hotel"></i> <span> {{$bu_info->bu_name}}</span>
+                                                </a>
+                                                <a href="{{url('adminPanel/change_status/'.$bu_info->id.'/0')}}" class="pull-left col-md-4"><span>تفعيل العقار</span></a>
+                                                <div class="clearfix"></div>
+                                            </li>
+                                        @endforeach
+
+                                    </ul>
+                            </li>
+                            <li class="footer"><a href="{{url('/adminPanel/bu')}}">مشاهدة جميع العقارات </a></li>
+                        </ul>
+                    </li>
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">

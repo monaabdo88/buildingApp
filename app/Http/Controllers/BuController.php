@@ -244,4 +244,9 @@ class BuController extends Controller
         $bu->update($input);
         return Redirect::back()->with('flash_message','تم تعديل العقار بنجاح');
     }
+    public function change_status($id,$status,Bu $bu){
+        $buUpdate = $bu->findOrFail($id);
+        $buUpdate->fill(['bu_status'=>$status])->save();
+        return Redirect::back()->with('flash_message','تم تعديل حالة العقار بنجاح');
+    }
 }

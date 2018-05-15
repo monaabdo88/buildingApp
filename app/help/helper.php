@@ -349,7 +349,6 @@ function setActive($array,$class = "active"){
 function get_count($status,$user_id){
     return \App\Bu::where('bu_status',$status)->where('user_id',$user_id)->count();
 }
-
-/*function setActive($path, $class = "active"){
-    return Request::is($path . '*') ? $class :  '';
-}*/
+function get_count_active($status){
+    return \App\Bu::where('bu_status',$status)->count();
+}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Bu;
 use App\Http\Requests\EditUserRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests\AddUserRequest;
@@ -31,9 +32,11 @@ class UsersController extends Controller
         ]);
         return redirect('/adminPanel/users')->with('flash_message','تمت اضافة العضوية بنجاح');
     }
-    public function edit($id, User $user){
+    public function edit($id, User $user,Bu $bu){
         $user = $user->findOrFail($id);
-        return view('admin.users.edit',compact('user'));
+        $activeBu = $bu->where('user_id',$id)->where('bu_status',0)->paginate(10);
+        $unactiveBu = $bu->where('user_id',$id)->where('bu_status',1)->paginate(10);
+        return view('admin.users.edit',compact('user','activeBu','unactiveBu'));
     }
     public function update($id,User $user, EditUserRequest $request){
         $user = $user->findOrFail($id);

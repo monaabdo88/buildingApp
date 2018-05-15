@@ -27,12 +27,68 @@
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         {!! Form::model($user,['route'=>['adminPanel.users.update',$user->id],'method'=>'patch','class'=>'form-horizontal']) !!}
-                            @include('admin.users.form');
+                            @include('admin.users.form',['user_type'=> 0]);
                         {!! Form::close() !!}
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
             </div><!-- /.col -->
         </div><!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#activity" data-toggle="tab" aria-expanded="false">العقارات المفعلة</a></li>
+                        <li class=""><a href="#timeline" data-toggle="tab" aria-expanded="false">العقارات الغير مفعلة </a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="activity">
+                            <table class="table table-responsive table-bordered">
+                                <tr>
+                                    <td>عنوان العقار</td>
+                                    <td>تاريخ الإضافة</td>
+                                    <td>التحكم</td>
+                                </tr>
+                                @foreach($activeBu as $active)
+                                    <tr>
+                                        <td><a href="{{url('/adminPanel/bu/'.$active->id.'/edit')}}">{{$active->bu_name}}</a></td>
+                                        <td>{{$active->created_at}}</td>
+                                        <td><a href="{{url('/adminPanel/change_status/'.$active->id.'/1')}}">إلغاء التفعيل</a> </td>
+                                    </tr>
+                                @endforeach;
+                            </table>
+                            <div class="text-center">
+                                    {{$activeBu->appends(Request::except('page'))->render()}}
+                                </div>
+
+                        </div>
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane" id="timeline">
+                            <table class="table table-responsive table-bordered">
+                                <tr>
+                                    <td>عنوان العقار</td>
+                                    <td>تاريخ الإضافة</td>
+                                    <th>التحكم</th>
+                                </tr>
+                                @foreach($unactiveBu as $unactive)
+                                    <tr>
+                                        <td><a href="{{url('/adminPanel/bu/'.$unactive->id.'/edit')}}">{{$unactive->bu_name}}</a></td>
+                                        <td>{{$active->created_at}}</td>
+                                        <td><a href="{{url('/adminPanel/change_status/'.$unactive->id.'/0')}}">تفعيل</a> </td>
+                                    </tr>
+                                @endforeach;
+                            </table>
+                            <div class="text-center">
+                                    {{$unactiveBu->appends(Request::except('page'))->render()}}
+                                </div>
+
+                        </div>
+                        <!-- /.tab-pane -->
+                    </div>
+                    <!-- /.tab-content -->
+                </div>
+                <!-- /.nav-tabs-custom -->
+            </div>
+        </div>
     </section><!-- /.content -->
 
 @endsection

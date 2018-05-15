@@ -21,6 +21,7 @@ Route::group(['middlewareGroups'=>['web','admin']],function(){
     #users routes
     Route::resource('/adminPanel/users','UsersController');
     Route::get('/adminPanel/users/{id}/del','UsersController@destroy');
+    Route::get('/adminPanel/change_status/{id}/{status}','BuController@change_status');
     #siteSettings
     Route::get('/adminPanel/siteSettings','SiteSettingController@index');
     Route::post('/adminPanel/siteSettings','SiteSettingController@store');
