@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Bu;
 use App\Http\Requests\BuRequest;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Datatables;
@@ -50,15 +51,21 @@ class BuController extends Controller
             'rooms_num' => $request->rooms_num,
             'bath_num' => $request->bath_num,
             'user_id' => $user->id,
-            'image'=> $image
+            'image'=> $image,
+            'month' => date('m')
         ];
         $bu->create($data);
         return redirect('/adminPanel/bu')->withFlashMessage('تم إضافة العقار بنجاح');
     }
-    public function edit($id){
+    public function edit($id, User $user){
         $bu = Bu::findOrFail($id);
+        if($bu->user_id == 0){
+            $user = '';
+        }else{
+            $users = $user->where('id',$bu->user_id)->get()[0];
+        }
         $edit = 'edit';
-        return view('admin.bu.edit',compact('bu','edit'));
+        return view('admin.bu.edit',compact('bu','users','edit'));
     }
     public function update($id, BuRequest $request){
         $bu = Bu::findOrFail($id);
@@ -204,7 +211,8 @@ class BuController extends Controller
             'bath_num' => $request->bath_num,
             'user_id' => $user,
             'image'=> $image,
-            'bu_status' => 1
+            'bu_status' => 1,
+            'month' => date('m')
         ];
         $bu->create($data);
         return view('website.done');

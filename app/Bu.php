@@ -24,6 +24,7 @@ class Bu extends Model
         'rooms_num',
         'bath_num',
         'bu_place',
-        'image'
+        'image',
+        'month'
     ];
 }

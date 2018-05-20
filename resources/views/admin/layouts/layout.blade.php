@@ -125,28 +125,17 @@
                                 <img src="{{url('admin/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
                                 <p>
                                     {{ Auth::user()->name }}
-                                    <small>Member since Nov. 2012</small>
+                                    <small>{{Auth::user()->created_at}}</small>
                                 </p>
                             </li>
                             <!-- Menu Body -->
-                            <li class="user-body">
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Followers</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Sales</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Friends</a>
-                                </div>
-                            </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="{{url('/adminPanel/users/'.Auth::user()->id.'/edit')}}" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="{{url('/logout')}}" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>
@@ -215,7 +204,6 @@
 </script>
 <!-- Bootstrap 3.3.4 -->
 {!! Html::script('admin/bootstrap/js/bootstrap.min.js') !!}
-@yield('footer')
 <!-- Morris.js charts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 {!! Html::script('admin/plugins/morris/morris.min.js') !!}
@@ -235,15 +223,17 @@
 {!! Html::script('admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') !!}
 <!-- Slimscroll -->
 {!! Html::script('admin/plugins/slimScroll/jquery.slimscroll.min.js') !!}
+{!! Html::script('admin/plugins/chartjs/Chart.min.js') !!}
 <!-- FastClick -->
 {!! Html::script('admin/plugins/fastclick/fastclick.min.js') !!}
 <!-- AdminLTE App -->
 {!! Html::script('admin/dist/js/app.min.js') !!}
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-{!! Html::script('admin/dist/js/pages/dashboard.js') !!}
+{!! Html::script('admin/dist/js/pages/dashboard2.js') !!}
 <!-- AdminLTE for demo purposes -->
 {!! Html::script('admin/dist/js/demo.js') !!}
 {!! Html::script('cus/sweetalert.min.js') !!}
+@yield('footer')
 @include('/admin/layouts/f_message');
 </body>
 </html>

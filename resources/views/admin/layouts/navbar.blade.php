@@ -18,7 +18,7 @@
 </li>
 <li class="treeview">
     <a href="#">
-        <i class="fa fa-users"></i> <span>التحكم في العقارات</span> <i class="fa fa-angle-left pull-left"></i>
+        <i class="fa fa-building"></i> <span>التحكم في العقارات</span> <i class="fa fa-angle-left pull-left"></i>
     </a>
     <ul class="treeview-menu">
         <li><a href="{{url('/adminPanel/bu/create')}}"><i class="fa fa-circle-o"></i> إضافة عقار </a></li>
@@ -27,7 +27,7 @@
 </li>
 <li class="treeview">
     <a href="#">
-        <i class="fa fa-users"></i> <span>التحكم في الرسائل</span> <i class="fa fa-angle-left pull-left"></i>
+        <i class="fa fa-envelope-o"></i> <span>التحكم في الرسائل</span> <i class="fa fa-angle-left pull-left"></i>
     </a>
     <ul class="treeview-menu">
         <li><a href="{{url('/adminPanel/contact/create')}}"><i class="fa fa-circle-o"></i> إضافة رسالة </a></li>

@@ -26,6 +26,24 @@
                         <h3 class="box-title">    تعديل عقار {{$bu->name}}</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
+                        <h4 class="box-title">معلومات صاحب العقار</h4>
+                            <div class="text2">
+                                @if($users == '')
+                                    <div class="col-md-4">تمت اضافة هذا العقار من خلال زائر</div>
+                                    @else
+                                <div class="col-md-4">أسم المستخدم : {{$users->name}}</div>
+                                <div class="col-md-4"> البريد الإلكتروني:{{$users->email}}</div>
+                                <div class="col-md-4">صلاحيات المستخدم :
+                                    @if($users->is_admin == 1)
+                                        <a href="{{url('adminPanel/users/'.$users->id.'/edit')}}">مدير</a>
+                                    @else
+                                        <a href="{{url('/adminPanel/users/'.$users->id.'/edit')}}">عضو عادي </a>
+                                    @endif
+                                </div>
+                                    @endif
+                            </div>
+                        <div class="clearfix"></div>
+                        <br/>
                         {!! Form::model($bu,['route'=>['adminPanel.bu.update',$bu->id],'method'=>'PATCH','class'=>'form-horizontal','files'=>true]) !!}
                         @include('admin.bu.form');
                         {!! Form::close() !!}

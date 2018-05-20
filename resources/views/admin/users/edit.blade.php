@@ -44,13 +44,21 @@
                         <div class="tab-pane active" id="activity">
                             <table class="table table-responsive table-bordered">
                                 <tr>
-                                    <td>عنوان العقار</td>
-                                    <td>تاريخ الإضافة</td>
-                                    <td>التحكم</td>
+                                    <th>عنوان العقار</th>
+                                    <th>سعر العقار</th>
+                                    <th>نوع العقار</th>
+                                    <th>المكان</th>
+                                    <th>نوع الملكية</th>
+                                    <th>تاريخ الإضافة</th>
+                                    <th>التحكم</th>
                                 </tr>
                                 @foreach($activeBu as $active)
                                     <tr>
                                         <td><a href="{{url('/adminPanel/bu/'.$active->id.'/edit')}}">{{$active->bu_name}}</a></td>
+                                        <td>{{$active->bu_price}}</td>
+                                        <td>{{bu_type()[$active->bu_type]}}</td>
+                                        <td>{{bu_place()[$active->bu_place]}}</td>
+                                        <td>{{bu_rent()[$active->bu_rent]}}</td>
                                         <td>{{$active->created_at}}</td>
                                         <td><a href="{{url('/adminPanel/change_status/'.$active->id.'/1')}}">إلغاء التفعيل</a> </td>
                                     </tr>
@@ -65,14 +73,22 @@
                         <div class="tab-pane" id="timeline">
                             <table class="table table-responsive table-bordered">
                                 <tr>
-                                    <td>عنوان العقار</td>
-                                    <td>تاريخ الإضافة</td>
+                                    <th>عنوان العقار</th>
+                                    <th>سعر العقار</th>
+                                    <th>نوع العقار</th>
+                                    <th>المكان</th>
+                                    <th>حالة العقار</th>
+                                    <th>تاريخ الإضافة</th>
                                     <th>التحكم</th>
                                 </tr>
                                 @foreach($unactiveBu as $unactive)
                                     <tr>
                                         <td><a href="{{url('/adminPanel/bu/'.$unactive->id.'/edit')}}">{{$unactive->bu_name}}</a></td>
-                                        <td>{{$active->created_at}}</td>
+                                        <td>{{$unactive->bu_price}}</td>
+                                        <td>{{bu_type()[$unactive->bu_type]}}</td>
+                                        <td>{{bu_place()[$unactive->bu_place]}}</td>
+                                        <td>{{bu_rent()[$unactive->bu_rent]}}</td>
+                                        <td>{{$unactive->created_at}}</td>
                                         <td><a href="{{url('/adminPanel/change_status/'.$unactive->id.'/0')}}">تفعيل</a> </td>
                                     </tr>
                                 @endforeach;
