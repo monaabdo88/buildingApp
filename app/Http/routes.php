@@ -18,6 +18,7 @@ Route::group(['middlewareGroups'=>['web','admin']],function(){
     Route::get('/adminPanel/contact/data',['as'=>'adminPanel.contact.data','uses'=>'ContactController@anyData']);
     #main Admin
     Route::get('/adminPanel','AdminController@index');
+    Route::get('/adminPanel/buYear/statics/','AdminController@showYear');
     #users routes
     Route::resource('/adminPanel/users','UsersController');
     Route::get('/adminPanel/users/{id}/del','UsersController@destroy');

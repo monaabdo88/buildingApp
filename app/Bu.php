@@ -25,6 +25,7 @@ class Bu extends Model
         'bath_num',
         'bu_place',
         'image',
-        'month'
+        'month',
+        'year'
     ];
 }

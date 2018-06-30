@@ -28,7 +28,7 @@
                     <div class="box-body">
                         <h4 class="box-title">معلومات صاحب العقار</h4>
                             <div class="text2">
-                                @if($users == '')
+                                @if(!isset($users))
                                     <div class="col-md-4">تمت اضافة هذا العقار من خلال زائر</div>
                                     @else
                                 <div class="col-md-4">أسم المستخدم : {{$users->name}}</div>

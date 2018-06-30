@@ -30,7 +30,8 @@
         <i class="fa fa-envelope-o"></i> <span>التحكم في الرسائل</span> <i class="fa fa-angle-left pull-left"></i>
     </a>
     <ul class="treeview-menu">
-        <li><a href="{{url('/adminPanel/contact/create')}}"><i class="fa fa-circle-o"></i> إضافة رسالة </a></li>
+        <!--<li><a href="{{url('/adminPanel/contact/create')}}"><i class="fa fa-circle-o"></i> إضافة رسالة </a></li>-->
         <li><a href="{{url('/adminPanel/contact')}}"><i class="fa fa-circle-o"></i> كل الرسائل </a></li>
     </ul>
 </li>
+<li><a href="{{url('/adminPanel/buYear/statics')}}"><i class="fa fa-circle-o"></i> كل الأحصائيات </a></li>

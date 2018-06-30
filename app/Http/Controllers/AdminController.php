@@ -19,8 +19,17 @@ class AdminController extends Controller
         $usersCount = $user->count();
         $contactCount = $contact->count();
         $mapping = $bu->select('bu_langtuide','bu_latituide','bu_name')->get();
-        $bu_created = $bu->select(DB::raw('COUNT(*) as counting , month'))->groupBy('month')->orderBy('month','asc')->get();
+        $bu_created = $bu->select(DB::raw('COUNT(*) as counting , month'))->where('year',date('Y'))->groupBy('month')->orderBy('month','asc')->get();
+        $lastUser = $user->take(8)->orderBy('id','desc')->get();
+        $lastBu = $bu->take(10)->orderBy('id','desc')->get();
+        $lastMsg = $contact->take(7)->orderBy('id','desc')->get();
         return view('admin.home.index',
-            compact('bu_count_active','bu_count_unactive','usersCount','contactCount','mapping','bu_created'));
+            compact('bu_count_active','bu_count_unactive','usersCount','contactCount',
+                'mapping','bu_created','lastUser','lastBu','lastMsg'));
+    }
+    public function showYear(Bu $bu){
+        $year = date('Y');
+        $bu_created = $bu->select(DB::raw('COUNT(*) as counting , month'))->where('year',date('Y'))->groupBy('month')->orderBy('month','asc')->get();
+        return view('admin.home.statics',compact('year','bu_created'));
     }
 }

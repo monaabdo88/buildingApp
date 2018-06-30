@@ -52,7 +52,8 @@ class BuController extends Controller
             'bath_num' => $request->bath_num,
             'user_id' => $user->id,
             'image'=> $image,
-            'month' => date('m')
+            'month' => date('m'),
+            'year' =>  date('Y')
         ];
         $bu->create($data);
         return redirect('/adminPanel/bu')->withFlashMessage('تم إضافة العقار بنجاح');
@@ -212,7 +213,8 @@ class BuController extends Controller
             'user_id' => $user,
             'image'=> $image,
             'bu_status' => 1,
-            'month' => date('m')
+            'month' => date('m'),
+            'year' => date('Y')
         ];
         $bu->create($data);
         return view('website.done');
