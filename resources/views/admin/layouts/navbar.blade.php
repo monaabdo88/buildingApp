@@ -1,12 +1,4 @@
-<li class="treeview">
-    <a href="#">
-        <i class="fa fa-users"></i> <span>التحكم في إعدادات الموقع</span> <i class="fa fa-angle-left pull-left"></i>
-    </a>
-    <ul class="treeview-menu">
-        <li><a href="{{url('/adminPanel/siteSettings')}}"><i class="fa fa-circle-o"></i>  تعديل إعدادات الموقع </a></li>
-
-    </ul>
-</li>
+<li><a href="{{url('/adminPanel/siteSettings')}}"><i class="fa fa-cog"></i><span>  تعديل إعدادات الموقع </span></a></li>
 <li class="treeview">
     <a href="#">
         <i class="fa fa-users"></i> <span>التحكم في العضويات</span> <i class="fa fa-angle-left pull-left"></i>
@@ -34,4 +26,5 @@
         <li><a href="{{url('/adminPanel/contact')}}"><i class="fa fa-circle-o"></i> كل الرسائل </a></li>
     </ul>
 </li>
-<li><a href="{{url('/adminPanel/buYear/statics')}}"><i class="fa fa-circle-o"></i> كل الأحصائيات </a></li>
+<li><a href="{{url('/adminPanel/buYear/statics')}}"><i class="fa fa-bar-chart"></i><span> كل الأحصائيات
+    </span></a></li>

@@ -19,17 +19,44 @@ class AdminController extends Controller
         $usersCount = $user->count();
         $contactCount = $contact->count();
         $mapping = $bu->select('bu_langtuide','bu_latituide','bu_name')->get();
-        $bu_created = $bu->select(DB::raw('COUNT(*) as counting , month'))->where('year',date('Y'))->groupBy('month')->orderBy('month','asc')->get();
+        $bu_created = $bu->select(DB::raw('COUNT(*) as counting , month'))->where('year',date('Y'))->groupBy('month')->orderBy('month','asc')->get()->toArray();
+        $array = [];
+        if(isset($bu_created[0]['month'])){
+            for($i = 1 ;$i < $bu_created[0]['month']; $i++ ){
+                $array[] = 0;
+            }
+        }
+        $new = array_merge($array , $bu_created);
         $lastUser = $user->take(8)->orderBy('id','desc')->get();
         $lastBu = $bu->take(10)->orderBy('id','desc')->get();
         $lastMsg = $contact->take(7)->orderBy('id','desc')->get();
         return view('admin.home.index',
             compact('bu_count_active','bu_count_unactive','usersCount','contactCount',
-                'mapping','bu_created','lastUser','lastBu','lastMsg'));
+                'mapping','new','lastUser','lastBu','lastMsg'));
     }
     public function showYear(Bu $bu){
         $year = date('Y');
-        $bu_created = $bu->select(DB::raw('COUNT(*) as counting , month'))->where('year',date('Y'))->groupBy('month')->orderBy('month','asc')->get();
-        return view('admin.home.statics',compact('year','bu_created'));
+        $bu_created = $bu->select(DB::raw('COUNT(*) as counting , month'))->where('year',date('Y'))->groupBy('month')->orderBy('month','asc')->get()->toArray();
+        $array = [];
+        if(isset($bu_created[0]['month'])){
+            for($i = 1 ;$i < $bu_created[0]['month']; $i++ ){
+                $array[] = 0;
+            }
+        }
+        $new = array_merge($array , $bu_created);
+        return view('admin.home.statics',compact('year','new'));
+    }
+    public function selectYear(Request $request , Bu $bu){
+        $year =$request->year;
+        $bu_created = $bu->select(DB::raw('COUNT(*) as counting , month'))->where('year',$year)->groupBy('month')->orderBy('month','asc')->get()->toArray();
+        $array = [];
+        if(isset($bu_created[0]['month'])){
+            for($i = 1 ;$i < $bu_created[0]['month']; $i++ ){
+                $array[] = 0;
+            }
+        }
+        $new = array_merge($array , $bu_created);
+        return view('admin.home.statics',compact('year','new'));
+
     }
 }

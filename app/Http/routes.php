@@ -19,6 +19,7 @@ Route::group(['middlewareGroups'=>['web','admin']],function(){
     #main Admin
     Route::get('/adminPanel','AdminController@index');
     Route::get('/adminPanel/buYear/statics/','AdminController@showYear');
+    Route::post('/adminPanel/buYear/statics/','AdminController@selectYear');
     #users routes
     Route::resource('/adminPanel/users','UsersController');
     Route::get('/adminPanel/users/{id}/del','UsersController@destroy');

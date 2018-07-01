@@ -252,8 +252,12 @@
                     pointHighlightFill: "#fff",
                     pointHighlightStroke: "rgba(60,141,188,1)",
                     data: [
-                        @foreach($bu_created as $create)
-                            {{$create->counting}},
+                        @foreach($new as $create)
+                            @if(is_array($create))
+                                {{$create['counting']}},
+                            @else
+                                {{$create}},
+                            @endif
                         @endforeach
                     ]
                 }

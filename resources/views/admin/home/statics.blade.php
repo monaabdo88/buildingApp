@@ -26,8 +26,8 @@
                     <div class="box-header">
                         <h3 class="box-title">إحصائيات العقارات</h3>
                         {!! Form::open(['url'=>'/adminPanel/buYear/statics','method'=>'POST']) !!}
-                        <select class="selectYear">
-                            @for($i = 2010 ; $i <= $year; $i++)
+                        <select class="selectYear" name="year">
+                            @for($i = 2010 ; $i <= date('Y'); $i++)
                                 <option value="{{$i}}">{{$i}}</option>
                             @endfor
                         </select>
@@ -94,8 +94,12 @@
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(60,141,188,1)",
                         data: [
-                            @foreach($bu_created as $create)
-                            {{$create->counting}},
+                            @foreach($new as $create)
+                                @if(is_array($create))
+                                    {{$create['counting']}},
+                                @else
+                                    {{$create}},
+                                @endif
                             @endforeach
                         ]
                     }
